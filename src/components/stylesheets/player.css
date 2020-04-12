@@ -1,0 +1,15 @@
+#poll {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  text-align: center;
+  background-color: rgba(8, 0, 127, 0.3);
+  padding: 1rem;
+}
+#poll a {
+  color: white;
+  text-decoration: underline;
+}
