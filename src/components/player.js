@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import { Poll } from "./poll";
 
 import videojs from "video.js";
@@ -6,16 +7,21 @@ import videojs from "video.js";
 import "./stylesheets/player.css";
 import "video.js/dist/video-js.css";
 
+const overlay = document.getElementById("video-overlay");
 export default class Player extends Component {
   constructor(props) {
     super(props);
+    this.el = document.createElement("div");
+    this.el.setAttribute("id", "poll");
     this.state = {
       modalEnabled: false,
     };
   }
 
   componentDidMount() {
+    overlay.appendChild(this.el);
     let that = this;
+
     this.player = videojs(this.videoNode, this.props, function onPlayerReady() {
       this.on("pause", () => {
         that.setState({
@@ -23,12 +29,8 @@ export default class Player extends Component {
           modalEnabled: true,
         });
 
-        var modal = this.createModal(document.getElementById("poll"), {
-          temporary: false,
-        });
-
         let player = this;
-        modal.on("modalclose", function () {
+        this.createModal(overlay).on("modalclose", function () {
           player.play();
           that.setState({
             ...that.state,
@@ -40,19 +42,18 @@ export default class Player extends Component {
   }
 
   componentWillUnmount() {
+    overlay.removeChild(this.el);
     if (this.player) {
       this.player.dispose();
     }
   }
 
   render() {
-    const INITAL_VALUE = { display: "inline-block" };
-    const NONE = { display: "none" };
     return (
       <>
-        <div id="poll" style={this.state.modalEnabled ? INITAL_VALUE : NONE}>
-          <Poll />
-        </div>
+        {this.state.modalEnabled
+          ? ReactDOM.createPortal(<Poll />, this.el)
+          : ""}
         <div data-vjs-player>
           <video
             ref={(node) => (this.videoNode = node)}

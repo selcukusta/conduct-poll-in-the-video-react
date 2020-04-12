@@ -45,7 +45,7 @@ const Results = () => {
   return (
     <div className="results-wrapper">
       <span className="label">
-        Thor: {votesOneInPercent().toFixed(2) + "%"}
+        Thor ({one} oy): {votesOneInPercent().toFixed(2) + "%"}
       </span>
       <div className="progress">
         <div
@@ -54,7 +54,7 @@ const Results = () => {
         ></div>
       </div>
       <span className="label">
-        Captain America: {votesTwoInPercent().toFixed(2) + "%"}
+        Captain America ({two} oy): {votesTwoInPercent().toFixed(2) + "%"}
       </span>
       <div className="progress">
         <div
@@ -63,7 +63,7 @@ const Results = () => {
         ></div>
       </div>
       <span className="label">
-        Black Panther: {votesThreeInPercent().toFixed(2) + "%"}
+        Black Panther ({three} oy): {votesThreeInPercent().toFixed(2) + "%"}
       </span>
       <div className="progress">
         <div

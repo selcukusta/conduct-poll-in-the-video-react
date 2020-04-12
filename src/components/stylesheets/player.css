@@ -1,4 +1,4 @@
-#poll {
+#video-overlay div#poll {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -9,7 +9,10 @@
   background-color: rgba(8, 0, 127, 0.3);
   padding: 1rem;
 }
-#poll a {
+#video-overlay div#poll:empty {
+  display: none;
+}
+#video-overlay a {
   color: white;
   text-decoration: underline;
 }
